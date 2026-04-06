@@ -151,11 +151,19 @@ footer {
 <option>Millet Upma - ₹70</option>
 </select><br><br>
 
+<label>Quantity:</label><br>
+<input type="number" id="qty" value="1" min="1" onchange="calculateTotal()">
+<h3>Total: ₹<span id="total">0</span></h3>
+
 <input type="text" name="address" placeholder="Delivery Address" required><br><br>
 
 <button type="submit">Place Order</button>
 
 </form>
+
+<button onclick="sendWhatsApp()" class="button">
+Order via WhatsApp
+</button>
 
 <br><br>
 <h3>Pay Online</h3>
@@ -167,6 +175,48 @@ Pay Now (UPI)
 </section>
 
 <footer>
+</footer>
+
+<script>
+function calculateTotal() {
+  let item = document.querySelector('select[name="item"]').value;
+  let qty = document.getElementById('qty').value;
+
+  let price = 0;
+
+  if(item.includes("Ragi")) price = 50;
+  if(item.includes("Jonna")) price = 50;
+  if(item.includes("Upma")) price = 70;
+
+  let total = price * qty;
+
+  document.getElementById("total").innerText = total;
+}
+
+function sendWhatsApp() {
+  let name = document.querySelector('input[name="name"]').value;
+  let phone = document.querySelector('input[name="phone"]').value;
+  let item = document.querySelector('select[name="item"]').value;
+  let address = document.querySelector('input[name="address"]').value;
+  let qty = document.getElementById('qty').value;
+  let total = document.getElementById('total').innerText;
+
+  let message = `Order Details:
+Name: ${name}
+Phone: ${phone}
+Item: ${item}
+Qty: ${qty}
+Total: ₹${total}
+Address: ${address}`;
+
+  let url = "https://wa.me/917995586472?text=" + message;
+
+  window.open(url, "_blank");
+}
+</script>
+
+</body>
+</html>
   <p>FSSAI No: 23626016000218</p>
 </footer>
 
