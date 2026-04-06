@@ -147,13 +147,14 @@ footer {
 <h4>Select Items</h4>
 
 <label>Ragi Idli (₹50)</label><br>
-<input type="number" id="ragi" value="0" min="0" onchange="calculateTotal()"><br><br>
+<input type="number" id="ragi" value="0" min="0" onchange="calculateTotal()">
 
 <label>Jonna Idli (₹50)</label><br>
-<input type="number" id="jonna" value="0" min="0" onchange="calculateTotal()"><br><br>
+<input type="number" id="jonna" value="0" min="0" onchange="calculateTotal()">
 
+<label>Millet Upma (₹70)</label><br>
+<input type="number" id="upma" value="0" min="0" onchange="calculateTotal()">
 
-<input type="number" id="upma" value="0" min="0" onchange="calculateTotal()"><br><br>
 
 <label>Quantity:</label><br>
 <input type="number" id="qty" value="1" min="1" onchange="calculateTotal()">
@@ -177,6 +178,18 @@ Pay Now (UPI)
 </a>
 
 </section>
+
+
+
+
+
+  
+
+<footer>
+</footer>
+
+
+<script>
 function calculateTotal() {
   let ragi = document.getElementById("ragi").value;
   let jonna = document.getElementById("jonna").value;
@@ -186,27 +199,50 @@ function calculateTotal() {
 
   document.getElementById("total").innerText = total;
 }
-<footer>
-</footer>
-
-<script>
-function calculateTotal() {
-  let item = document.querySelector('select[name="item"]').value;
-  let qty = document.getElementById('qty').value;
-
-  let price = 0;
+ function sendWhatsApp() {
+  let name = document.querySelector('input[name="name"]').value;
+  let phone = document.querySelector('input[name="phone"]').value;
+  let address = document.querySelector('input[name="address"]').value;
 
   let ragi = document.getElementById("ragi").value;
-let jonna = document.getElementById("jonna").value;
-let upma = document.getElementById("upma").value;
+  let jonna = document.getElementById("jonna").value;
+  let upma = document.getElementById("upma").value;
 
-let items = "";
+  let total = document.getElementById("total").innerText;
 
-let message = `Order Details:
+  let items = "";
+
+  if (ragi > 0) items += "Ragi Idli x " + ragi + "\n";
+  if (jonna > 0) items += "Jonna Idli x " + jonna + "\n";
+  if (upma > 0) items += "Millet Upma x " + upma + "\n";
+
+  let message = `Order Details:
 Name: ${name}
 Phone: ${phone}
 
 Items:
+${items}
+
+Total: ₹${total}
+Address: ${address}`;
+
+  let url = "https://wa.me/7995586472?text=" + encodeURIComponent(message);
+
+  window.open(url, "_blank");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 ${items}
 
 Total: ₹${total}
