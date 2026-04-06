@@ -144,12 +144,16 @@ footer {
 
 <input type="tel" name="phone" placeholder="Phone Number" required><br><br>
 
-<select name="item" required>
-<option value="">Select Item</option>
-<option>Ragi Idli - ₹50</option>
-<option>Jonna Idli - ₹50</option>
-<option>Millet Upma - ₹70</option>
-</select><br><br>
+<h4>Select Items</h4>
+
+<label>Ragi Idli (₹50)</label><br>
+<input type="number" id="ragi" value="0" min="0" onchange="calculateTotal()"><br><br>
+
+<label>Jonna Idli (₹50)</label><br>
+<input type="number" id="jonna" value="0" min="0" onchange="calculateTotal()"><br><br>
+
+
+<input type="number" id="upma" value="0" min="0" onchange="calculateTotal()"><br><br>
 
 <label>Quantity:</label><br>
 <input type="number" id="qty" value="1" min="1" onchange="calculateTotal()">
@@ -173,7 +177,15 @@ Pay Now (UPI)
 </a>
 
 </section>
+function calculateTotal() {
+  let ragi = document.getElementById("ragi").value;
+  let jonna = document.getElementById("jonna").value;
+  let upma = document.getElementById("upma").value;
 
+  let total = (ragi * 50) + (jonna * 50) + (upma * 70);
+
+  document.getElementById("total").innerText = total;
+}
 <footer>
 </footer>
 
@@ -184,11 +196,21 @@ function calculateTotal() {
 
   let price = 0;
 
-  if(item.includes("Ragi")) price = 50;
-  if(item.includes("Jonna")) price = 50;
-  if(item.includes("Upma")) price = 70;
+  let ragi = document.getElementById("ragi").value;
+let jonna = document.getElementById("jonna").value;
+let upma = document.getElementById("upma").value;
 
-  let total = price * qty;
+let items = "";
+
+let message = `Order Details:
+Name: ${name}
+Phone: ${phone}
+
+Items:
+${items}
+
+Total: ₹${total}
+Address: ${address}`;
 
   document.getElementById("total").innerText = total;
 }
