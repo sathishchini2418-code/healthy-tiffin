@@ -197,17 +197,9 @@ function calculateTotal() {
 
   let total = (ragi * 50) + (jonna * 50) + (upma * 70);
 
-  document.getElementById("total").innerText = total;
-}
- function sendWhatsApp() {
-  let name = document.querySelector('input[name="name"]').value;
-  let phone = document.querySelector('input[name="phone"]').value;
-  let address = document.querySelector('input[name="address"]').value;
-
-  let ragi = document.getElementById("ragi").value;
-  let jonna = document.getElementById("jonna").value;
-  let upma = document.getElementById("upma").value;
-
+  <input type="number" id="ragi" value="0" oninput="calculateTotal()">
+<input type="number" id="jonna" value="0" oninput="calculateTotal()">
+<input type="number" id="upma" value="0" oninput="calculateTotal()">
   let total = document.getElementById("total").innerText;
 
   let items = "";
@@ -220,7 +212,7 @@ function calculateTotal() {
 Name: ${name}
 Phone: ${phone}
 
-Items:
+Total: ₹<span id="total">0</span>:
 ${items}
 
 Total: ₹${total}
@@ -265,18 +257,14 @@ Phone: ${phone}
 Item: ${item}
 Qty: ${qty}
 Total: ₹${total}
-Address: ${address}`;
+<script>
+function calculateTotal() {
+  let ragi = parseInt(document.getElementById("ragi").value) || 0;
+  let jonna = parseInt(document.getElementById("jonna").value) || 0;
+  let upma = parseInt(document.getElementById("upma").value) || 0;
 
-  let url = "https://wa.me/917995586472?text=" + message;
+  let total = (ragi * 50) + (jonna * 50) + (upma * 70);
 
-  window.open(url, "_blank");
+  document.getElementById("total").innerText = total;
 }
 </script>
-
-</body>
-</html>
-  <p>FSSAI No: 23626016000218</p>
-</footer>
-
-</body>
-</html>
